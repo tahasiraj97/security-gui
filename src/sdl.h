@@ -6,6 +6,7 @@
 extern SDL_Window *window;
 extern SDL_Renderer *renderer;
 
-int init(void);
+void init();
+void addLog(char *message, const char *time, int severity);
 
 #endif
