@@ -1,8 +1,0 @@
-services:
-  dashboard-dev:
-    image: emscripten/emsdk:latest
-    restart: unless-stopped
-    ports: ["5300:8000"]
-    volumes: [".:/app"]
-    working_dir: /app
-    command: sh -c "mkdir -p dist && emcc src/main.c -sUSE_SDL=3 -O0 -g -o dist/index.html && touch /tmp/last_build && (while sleep 1; do if find src -type f -newer /tmp/last_build | grep -E '\\.(c|h)$$' | grep -q .; then emcc src/main.c -sUSE_SDL=3 -O0 -g -o dist/index.html && touch /tmp/last_build; fi; done) & npx --yes browser-sync@3.0.4 start --server dist --files 'dist/*' --port 8000 --host 0.0.0.0 --no-open --no-ui --reload-debounce 300"
